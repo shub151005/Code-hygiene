@@ -1,0 +1,12 @@
+{
+  "name": "sample-vulnerable-app",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "dependencies": {
+    "lodash": "4.17.20",
+    "left-pad": "1.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Code Hygiene Dashboard</title>
+  <style>
+    body { background: #0f172a; color: #f8fafc; font-family: system-ui, sans-serif; padding: 2rem; margin: 0; }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #334155; padding-bottom: 1.5rem; margin-bottom: 2rem; }
+    .gauge { position: relative; width: 90px; height: 90px; }
+    .gauge svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .circle-bg { stroke: #334155; fill: none; stroke-width: 10; }
+    .circle-val { stroke: #f59e0b; fill: none; stroke-width: 10; stroke-dasharray: 282.7433388230814; stroke-dashoffset: 110.26990214100175; }
+    .score-txt { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: #f59e0b; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .card { background: #1e293b; border: 1px solid #334155; padding: 1.2rem; border-radius: 0.75rem; }
+    .num { font-size: 1.75rem; font-weight: 700; }
+    .label { font-size: 0.8rem; color: #94a3b8; text-transform: uppercase; }
+    .table-card { background: #1e293b; border: 1px solid #334155; border-radius: 0.75rem; padding: 1.2rem; margin-bottom: 1.5rem; }
+    .item { padding: 0.75rem; border-bottom: 1px solid #334155; }
+    .badge { padding: 0.2rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
+    .badge-red { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .badge-yellow { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header">
+      <div>
+        <h1>Code Hygiene & Security Dashboard</h1>
+        <div style="color: #94a3b8; font-size: 0.85rem">Target: C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app • Date: 26/9/2026, 12:36:23 am</div>
+      </div>
+      <div class="gauge">
+        <svg viewBox="0 0 100 100">
+          <circle class="circle-bg" cx="50" cy="50" r="45"></circle>
+          <circle class="circle-val" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="score-txt">61</div>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card"><div class="num" style="color: #38bdf8">4</div><div class="label">Files Scanned</div></div>
+      <div class="card"><div class="num" style="color: #ef4444">5</div><div class="label">Dead Code Items</div></div>
+      <div class="card"><div class="num" style="color: #f59e0b">1</div><div class="label">Unused Packages</div></div>
+      <div class="card"><div class="num" style="color: #ef4444">1</div><div class="label">Vulnerabilities (1 Reachable)</div></div>
+    </div>
+    <div class="table-card">
+      <h3 style="margin-bottom: 1rem">Dead Code & Orphan Findings</h3>
+      
+        <div class="item">
+          <span class="badge badge-red">orphan-file</span>
+          <strong style="margin-left: 0.5rem">src\legacy-utils.ts</strong> <span style="color: #94a3b8">(C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app\src\legacy-utils.ts:1)</span>
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem">File is never imported anywhere in the project tree. Safe to remove or archive.</div>
+        </div>
+      
+        <div class="item">
+          <span class="badge badge-yellow">unused-export</span>
+          <strong style="margin-left: 0.5rem">oldHashingRoutine</strong> <span style="color: #94a3b8">(C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app\src\legacy-utils.ts:2)</span>
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem">Exported function 'oldHashingRoutine' is never imported by any file or used internally.</div>
+        </div>
+      
+        <div class="item">
+          <span class="badge badge-yellow">unused-export</span>
+          <strong style="margin-left: 0.5rem">DEPRECATED_FLAG</strong> <span style="color: #94a3b8">(C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app\src\legacy-utils.ts:6)</span>
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem">Exported variable 'DEPRECATED_FLAG' is never imported by any file or used internally.</div>
+        </div>
+      
+        <div class="item">
+          <span class="badge badge-yellow">unused-export</span>
+          <strong style="margin-left: 0.5rem">unusedCalculator</strong> <span style="color: #94a3b8">(C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app\src\services\math.ts:6)</span>
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem">Exported function 'unusedCalculator' is never imported by any file or used internally.</div>
+        </div>
+      
+        <div class="item">
+          <span class="badge badge-yellow">unused-function</span>
+          <strong style="margin-left: 0.5rem">formatSecretToken</strong> <span style="color: #94a3b8">(C:\Users\Dhrub Goyal\.gemini\antigravity\scratch\code-hygiene-cli\tests\fixtures\sample-app\src\services\auth.ts:4)</span>
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-top: 0.25rem">Unexported function 'formatSecretToken' is declared but never referenced or invoked.</div>
+        </div>
+      
+    </div>
+    <div class="table-card">
+      <h3 style="margin-bottom: 1rem">Dependency Issues & CVEs</h3>
+      
+        <div class="item">
+          <span class="badge badge-red">vulnerable</span>
+          <strong style="margin-left: 0.5rem">lodash</strong> (v4.17.20)
+          <span style="color: #f87171">• REACHABLE IN CODE</span>
+          <div style="font-size: 0.85rem; color: #34d399; margin-top: 0.25rem">💡 Upgrade to >= 4.17.21</div>
+        </div>
+      
+        <div class="item">
+          <span class="badge badge-yellow">unused</span>
+          <strong style="margin-left: 0.5rem">left-pad</strong> (v1.3.0)
+          <span style="color: #94a3b8">• NOT IMPORTED</span>
+          <div style="font-size: 0.85rem; color: #34d399; margin-top: 0.25rem">💡 Remove package (never imported)</div>
+        </div>
+      
+    </div>
+  </div>
+</body>
+</html>

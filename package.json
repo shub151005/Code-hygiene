@@ -9,7 +9,11 @@
   "scripts": {
     "build": "tsc",
     "start": "tsx src/cli.ts",
-    "test": "vitest run"
+    "test": "vitest run --no-cache",
+    "pipeline": "tsx scripts/pipeline.ts",
+    "sample": "tsx scripts/pipeline.ts tests/fixtures/sample-app --offline --out-dir artifacts",
+    "sample:strict": "tsx scripts/pipeline.ts tests/fixtures/sample-app --offline --out-dir artifacts --ci --fail-on-dead-code",
+    "sample:verify-gate": "node scripts/verify-strict-gate.mjs"
   },
   "keywords": [
     "dead-code",

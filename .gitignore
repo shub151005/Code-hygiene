@@ -1,0 +1,29 @@
+﻿# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Pipeline artifacts (generated reports and summaries)
+artifacts/
+
+# Local report files written to repository root during ad-hoc runs
+# (historical reports already tracked are not removed by this rule)
+code-hygiene-report.json
+code-hygiene-report.html
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Editor & OS artefacts
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+
+# Test coverage output
+coverage/

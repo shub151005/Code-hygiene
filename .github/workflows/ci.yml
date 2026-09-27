@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pipeline:
+    name: Build · Test · Audit
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Run the full pipeline against the offline sample fixture.
+      # --offline skips network CVE calls so CI is fully deterministic.
+      # The sample fixture is intentionally unhealthy; we expect the
+      # pipeline itself to PASS (build + tests succeed, reports generated).
+      # The verifier checks that strict mode fails specifically at the audit
+      # gate, with successful build/tests and fresh reports present.
+      - name: Run pipeline (offline sample, no gates)
+        run: npm run sample
+
+      - name: Verify strict gate failure and report retention
+        run: npm run sample:verify-gate
+
+      - name: Upload audit artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-artifacts-${{ matrix.os }}
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 30
+
